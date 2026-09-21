@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>System Check</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      color: #00ff66;
+      font-family: Consolas, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      width: 600px;
+      max-width: 90%;
+      border: 1px solid #00ff66;
+      padding: 30px;
+      box-shadow: 0 0 25px #003b19;
+    }
+
+    h1 {
+      font-size: 25px;
+    }
+
+    #status {
+      margin: 25px 0;
+      line-height: 2;
+    }
+
+    .bar {
+      height: 18px;
+      border: 1px solid #00ff66;
+      margin-top: 20px;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0%;
+      background: #00ff66;
+      transition: width 0.3s;
+    }
+
+    #prank {
+      display: none;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    #prank h2 {
+      font-size: 40px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background: #00ff66;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box" id="main">
+  <h1>⚠️ جاري فحص النظام...</h1>
+
+  <div id="status">
+    بدء الفحص...
+  </div>
+
+  <div class="bar">
+    <div id="progress"></div>
+  </div>
+</div>
+
+<div class="box" id="prank">
+  <h2>تم التهكير قول عمي عزوز وارحمك !</h2>
+  <p>.</p>تمحن 10 مرات وافكك 
+  <p>ولا تم أخذ أو حفظ أي معلومات منك.</p>
+  <button onclick="location.reload()">إعادة المقلب</button>
+</div>
+
+<script>
+  const messages = [
+    "جاري فحص الملفات...",
+    "جاري تحليل النظام...",
+    "جاري التحقق من الاتصالات...",
+    "جاري فحص الإعدادات...",
+    "اكتمل الفحص..."
+  ];
+
+  let progress = 0;
+  let i = 0;
+
+  const timer = setInterval(() => {
+    progress += 20;
+
+    document.getElementById("progress").style.width = progress + "%";
+
+    if (i < messages.length) {
+      document.getElementById("status").textContent = messages[i];
+      i++;
+    }
+
+    if (progress >= 100) {
+      clearInterval(timer);
+
+      setTimeout(() => {
+        document.getElementById("main").style.display = "none";
+        document.getElementById("prank").style.display = "block";
+      }, 800);
+    }
+  }, 900);
+</script>
+
+</body>
+</html>
